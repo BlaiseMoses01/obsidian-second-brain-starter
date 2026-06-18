@@ -1,0 +1,20 @@
+repos:
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.8.6
+    hooks:
+      - id: ruff
+        args: [--fix]
+      - id: ruff-format
+  - repo: https://github.com/DavidAnson/markdownlint-cli2
+    rev: v0.15.0
+    hooks:
+      - id: markdownlint-cli2
+        exclude: ^dump/
+  - repo: local
+    hooks:
+      - id: check-wikilinks
+        name: check wikilinks
+        entry: python3 .github/scripts/check_wikilinks.py
+        language: system
+        pass_filenames: false
+        files: \.md$

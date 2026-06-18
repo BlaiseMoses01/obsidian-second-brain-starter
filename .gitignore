@@ -1,0 +1,12 @@
+# Obsidian local state (machine-specific — would conflict across devices)
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+.obsidian/cache
+# Tracked on purpose: graph.json (type colors), core-plugins.json, app.json, appearance.json
+
+# Claude Code local/per-machine overrides
+.claude/settings.local.json
+
+# OS / editor cruft
+.DS_Store
+Thumbs.db

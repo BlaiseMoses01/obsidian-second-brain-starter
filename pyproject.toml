@@ -1,0 +1,8 @@
+# Dev tooling config only — the vault's runtime scripts are stdlib-only and have no dependencies.
+
+[tool.ruff]
+target-version = "py311"
+line-length = 120
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
