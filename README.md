@@ -7,12 +7,6 @@ A boilerplate [Obsidian](https://obsidian.md) vault that [Claude Code](https://c
 maintains for you. You drop raw material in; the agent reads it, writes and cross-links wiki pages, and
 keeps a navigable knowledge graph. **You own the sources and the schema — the agent owns the wiki.**
 
-## Who it's for
-
-Anyone who wants a knowledge base that *compounds* without the manual upkeep: you feed it articles,
-PDFs, meeting notes, and stray thoughts; Claude turns them into an interlinked, queryable wiki and keeps
-it consistent over time. It's a starting point — clone it, make it yours, and grow the schema as you go.
-
 ## How it works
 
 ### The three layers
@@ -126,9 +120,6 @@ that across devices:
    tracked so a fresh clone looks right.
 4. Enable pull-before-push to avoid conflicts; add large binaries to `dump/assets/` deliberately.
 
-> Tip: on GitHub, enable **Settings → Template repository** so others get a one-click **Use this
-> template** button.
-
 ## Development / CI
 
 Runtime scripts are Python **stdlib-only** (no dependencies). CI is dev tooling only:
@@ -149,5 +140,4 @@ Checks (also run in GitHub Actions on push/PR — see `.github/workflows/ci.yml`
 ## License
 
 [MIT](LICENSE) © 2026 Blaise Moses. See [`CHANGELOG.md`](CHANGELOG.md) for version history.
-
 Built to be maintained with [Claude Code](https://claude.com/claude-code).
