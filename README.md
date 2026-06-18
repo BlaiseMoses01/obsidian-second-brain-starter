@@ -21,7 +21,7 @@ keeps a navigable knowledge graph. **You own the sources and the schema — the 
 
 ### The loop
 
-```text
+```textg
 drop a source in dump/  →  /ingest  →  wiki page(s) written + linked  →  /query to ask  →  /lint to keep it healthy
 ```
 
