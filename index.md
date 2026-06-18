@@ -5,16 +5,22 @@ when answering a query. Updated on every ingest. Sections populate as you ingest
 
 ## Sources
 
-## Projects
-
 ## People
 
 ## Organizations
 
-## Meetings
-
-## Sessions
+## Projects
 
 ## Patterns
 
+## Devlog
+
+## Meetings
+
 ## Goals
+
+## Journal
+
+## Sessions
+
+## Plans

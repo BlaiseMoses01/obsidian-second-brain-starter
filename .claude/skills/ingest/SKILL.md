@@ -12,7 +12,12 @@ Integrate one new source into the wiki. Default to **one source at a time** and 
 
 This skill is **global** — it runs from any CWD. Resolve the vault root before any reads/writes:
 
-Vault (auto-resolved): !`d="${CLAUDE_SKILL_DIR}"; if [ -n "${SECOND_BRAIN_DIR:-}" ]; then echo "$SECOND_BRAIN_DIR"; else while [ "$d" != "/" ] && [ -n "$d" ]; do if [ -f "$d/CLAUDE.md" ] && [ -d "$d/wiki" ]; then echo "$d"; break; fi; d=$(dirname "$d"); done; fi`
+**Resolve the vault root first.** Run this in a **Bash tool call** (not via `!`-inline execution — the
+static permission check rejects shell expansions, so the inline form fails with "Contains expansion"):
+
+```sh
+d="${CLAUDE_SKILL_DIR:-$(pwd)}"; if [ -n "${SECOND_BRAIN_DIR:-}" ]; then echo "$SECOND_BRAIN_DIR"; else while [ "$d" != "/" ] && [ -n "$d" ]; do if [ -f "$d/CLAUDE.md" ] && [ -d "$d/wiki" ]; then echo "$d"; break; fi; d=$(dirname "$d"); done; fi
+```
 
 Precedence: `$SECOND_BRAIN_DIR` → walk up from the skill dir for a folder with `CLAUDE.md` + `wiki/`. If neither resolves, **stop** and tell the user to set `SECOND_BRAIN_DIR`. **All paths below (`dump/`, `wiki/`, `index.md`, `log.md`) are relative to this resolved root.**
 

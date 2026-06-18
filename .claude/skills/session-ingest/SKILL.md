@@ -13,7 +13,12 @@ bulky raw text out of this context), then you do the wiki integration after a co
 
 ## Vault root
 
-Vault (auto-resolved): !`d="${CLAUDE_SKILL_DIR}"; if [ -n "${SECOND_BRAIN_DIR:-}" ]; then echo "$SECOND_BRAIN_DIR"; else while [ "$d" != "/" ] && [ -n "$d" ]; do if [ -f "$d/CLAUDE.md" ] && [ -d "$d/wiki" ]; then echo "$d"; break; fi; d=$(dirname "$d"); done; fi`
+**Resolve the vault root first.** Run this in a **Bash tool call** (not via `!`-inline execution — the
+static permission check rejects shell expansions, so the inline form fails with "Contains expansion"):
+
+```sh
+d="${CLAUDE_SKILL_DIR:-$(pwd)}"; if [ -n "${SECOND_BRAIN_DIR:-}" ]; then echo "$SECOND_BRAIN_DIR"; else while [ "$d" != "/" ] && [ -n "$d" ]; do if [ -f "$d/CLAUDE.md" ] && [ -d "$d/wiki" ]; then echo "$d"; break; fi; d=$(dirname "$d"); done; fi
+```
 
 ## Steps
 
