@@ -50,7 +50,8 @@ checks below.
 
 1. **Contradictions** — claims that conflict across pages. Flag both, link their sources.
 2. **Stale / superseded claims** — older statements a newer source has overtaken. Mark the old
-   `status: superseded` (or update it) and link the newer source.
+   `status: superseded` (or update it) and link the newer source. Also flag **overdue tasks** in
+   `wiki/tasks/open.md` (a `due:` date in the past, still unchecked) for follow-up or archiving.
 3. **Orphan pages** — pages with no inbound `[[links]]`. Either link them in from relevant pages or
    propose archiving.
 4. **Missing pages** — concepts/entities referenced (linked or named) but lacking their own page.

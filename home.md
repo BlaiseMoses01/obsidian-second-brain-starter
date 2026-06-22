@@ -6,8 +6,8 @@ Entry point to the vault. Start here.
 
 - Add raw sources to `dump/` (read-only to the agent), then run **ingest**.
 - Ask questions with **query**; health-check with **lint**.
-- **meeting-recap** after calls · **session-planning** in the morning · **touchpoint** for alignment
-  gut-checks · **session-ingest** to fold a working session into the wiki before `/clear`.
+- **task** to quick-capture standalone todos · **configure** to reshape which buckets exist ·
+  **session-ingest** to fold a working session into the wiki before `/clear`.
 
 ## Active projects
 
@@ -18,5 +18,7 @@ _None yet._
 _None yet._
 
 ## Open threads
+
+Canonical open-task list: [[tasks/open]] (capture with **/task**). Soonest-due items surface here.
 
 _None yet._

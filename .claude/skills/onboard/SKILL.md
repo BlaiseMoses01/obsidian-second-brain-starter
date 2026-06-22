@@ -24,10 +24,15 @@ run repeatedly; it never deletes anything.
    user wants to change it), ask for their **name** and **primary use case**, then fill in the
    **Core Info** block.
 
-3. **Sanity-check structure.** Confirm `dump/` (+ `dump/assets/`) and the `wiki/` buckets exist;
+3. **Pick buckets.** The vault ships with only the **core** buckets (`sources/`, `tasks/`). Run
+   **/configure** to scaffold the optional page types the owner actually wants — pass the use case
+   from step 2 as a blurb, or let it quiz interactively. (Skip only if the owner explicitly wants to
+   stay core-only for now; they can run `/configure` anytime.)
+
+4. **Sanity-check structure.** Confirm `dump/` (+ `dump/assets/`) and the core `wiki/` buckets exist;
    create only what's missing. Never touch existing content.
 
-4. **Report** what was linked and set, and point the user to `home.md` to begin. Note: newly
+5. **Report** what was linked and set, and point the user to `home.md` to begin. Note: newly
    symlinked skills may require restarting Claude Code to register.
 
 ## Reconfigure
@@ -38,4 +43,5 @@ run repeatedly; it never deletes anything.
 
 ## Done when
 
-- The global skills are symlinked, `SECOND_BRAIN_DIR` points at this vault, and Core Info is filled in.
+- The global skills are symlinked, `SECOND_BRAIN_DIR` points at this vault, Core Info is filled in,
+  and the owner's buckets are scaffolded (or they've chosen to stay core-only).

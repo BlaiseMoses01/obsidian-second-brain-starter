@@ -46,10 +46,9 @@ obsidian-starter/
 ├── CLAUDE.md                   # the schema / operating manual (read every session)
 ├── dump/                       # your raw sources (read-only to the agent); assets/ for images
 ├── wiki/
-│   ├── _templates/             # one template per page type (source, person, project, …)
-│   ├── people/ organizations/ projects/ meetings/ sessions/
-│   ├── sources/ patterns/ goals/ journal/ plans/ devlog/   # the buckets
-│   └── …                       # buckets ship empty, ready to fill
+│   ├── _templates/             # template per active page type (ships: source, task, session)
+│   ├── sources/ tasks/ sessions/  # core buckets — always present
+│   └── …                       # add optional buckets (people, projects, …) with /configure
 ├── .claude/
 │   ├── settings.json           # dump/ read-only guardrail + config
 │   └── skills/                 # the operations (see below)
@@ -68,7 +67,8 @@ and Python 3.11+ (the setup scripts are stdlib-only).
 2. **Open the vault folder in Claude Code** and run **`/onboard`**. It:
    - symlinks the global skills into `~/.claude/skills`,
    - sets `SECOND_BRAIN_DIR` in `~/.claude/settings.json`,
-   - fills in your name + use case in `CLAUDE.md` → Core Info.
+   - fills in your name + use case in `CLAUDE.md` → Core Info,
+   - runs **`/configure`** to scaffold the optional buckets you want (or stay core-only).
 3. **Open the same folder in Obsidian** and start from `home.md`.
 4. **Drop a source** into `dump/` and run **`/ingest`** to watch it fold into the wiki.
 
@@ -84,13 +84,11 @@ wires this up. Vault-local skills run when the vault is your working folder.
 | Skill | When to use | Example |
 | --- | --- | --- |
 | **ingest** *(global)* | Fold a source into the wiki | `/ingest ~/Downloads/article.pdf` |
+| **task** *(global)* | Quick-capture standalone asks/todos | `/task coffee chat with Jane next week` |
+| **configure** *(global)* | Pick which optional buckets your brain has | `/configure side projects, learning, people` |
 | **query** *(global)* | Ask the wiki a question, with citations | `/query what did we decide about X?` |
 | **lint** *(global)* | Health-check the wiki | `/lint` |
-| **project-snapshot** *(global)* | Capture the repo you're in as a project page | `/project-snapshot` |
 | **session-ingest** *(global)* | Fold the current Claude Code session into the wiki | `/session-ingest` (before `/clear`) |
-| **meeting-recap** | Capture a call while it's fresh | `/meeting-recap` |
-| **session-planning** | Dependency-order + time-block the day | `/session-planning` |
-| **touchpoint** | Alignment gut-check against your goals | `/touchpoint` |
 | **onboard / offboard** | Install / uninstall the vault on a machine | `/onboard` |
 
 ## Customizing your brain
@@ -99,9 +97,10 @@ Make it yours — the schema is meant to evolve:
 
 - **Identity & focus** — edit the `## Core Info` block in `CLAUDE.md` (owner + use case). `/onboard`
   prompts for this on first run.
-- **Buckets** — `CLAUDE.md` has a "Wiki Bucket Map" describing each folder and its filename convention.
-  To add a new page type: create `wiki/<bucket>/`, add a `wiki/_templates/<type>.md` template, add a
-  heading in `index.md`, and (optional) a `tag:#<type>` color group in `.obsidian/graph.json`.
+- **Buckets** — the vault ships **core-only** (`sources/`, `tasks/`, `sessions/`). Run **`/configure`** to add the
+  optional page types you want — buckets are open-ended, so it designs whatever fits (driven by a
+  use-case blurb or an interview) and scaffolds the dir, template, `CLAUDE.md` row, `index.md`
+  section, and graph color from an agent-authored `--spec` JSON. Re-run anytime to add/remove buckets.
 - **Templates** — every page type has a template in `wiki/_templates/`; tweak freely. They use
   placeholders like `<First Last>`, `firstname-lastname`, and `YYYY-MM-DD`.
 - **Guardrails** — `dump/` is read-only to the agent via deny-rules in `.claude/settings.json`.

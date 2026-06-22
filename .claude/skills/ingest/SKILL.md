@@ -41,6 +41,9 @@ Precedence: `$SECOND_BRAIN_DIR` → walk up from the skill dir for a folder with
    - If the source **contradicts** an existing claim, don't overwrite silently — add a
      `> [!warning] Contradiction` callout linking both sources and flag it to the user.
    - Bump each touched page's `updated:` to today and add new `[[wikilinks]]`.
+   - If the source contains **action items / asks directed at the owner** that don't already live in a
+     meeting/goal/project, append them to `wiki/tasks/open.md` in its line format, with a
+     `src: [[sources/<slug>]]` cite-back.
 5. **Update `index.md`** — add the new source and any new pages under their category sections with
    one-line summaries.
 6. **Append to `log.md`**: `## [YYYY-MM-DD] ingest | <Source Title>` followed by 1–3 bullets listing

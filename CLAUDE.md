@@ -40,34 +40,37 @@ This file is the **schema**: it tells the LLM agent how this vault is structured
 
 ## Wiki Bucket Map
 
-| Path                     | Scope                                                               | Filename convention     |
-| ------------------------ | ------------------------------------------------------------------- | ----------------------- |
-| `wiki/sources/`          | One **summary page per ingested source**. (Karpathy core)           | `kebab-title.md`        |
-| `wiki/people/`           | People: contacts, colleagues, interviewees, social, public figures. | `firstname-lastname.md` |
-| `wiki/organizations/`    | Companies/orgs: employers, clients, competitors, vendors, schools.  | `org-name.md`           |
-| `wiki/projects/`         | initatives, pocs , or greater organized deliveries (folder per project; nest sub-notes inside) | `project-name/project-name.md` |
-| `wiki/patterns/`         | Reusable playbooks, mental models, designs, how-tos.                | `pattern-name.md`       |
-| `wiki/devlog/`           | Dated engineering/work-log entries, per project or repo.            | `YYYY-MM-DD-slug.md`    |
-| `wiki/meetings/`         | Dated notes: meetings, calls, interviews, social conversations.     | `YYYY-MM-DD-slug.md`    |
-| `wiki/goals/`            | Goals, greater ambitions, things to work towards and track          | `goal-name.md`          |
-| `wiki/journal/`          | Dated personal reflections, feelings, thoughts, and insights        | `YYYY-MM-DD.md`         |
-| `wiki/_templates/`       | One template per page type. Reference when creating new pages.      | `<type>.md`             |
-| `wiki/sessions/`          | working sessions logged wholistically                              | `YYYY-MM-DD-topic.md`   |
-| `wiki/plans/`            | Dated daily plans: dependency-ordered task lists + time-blocked schedules. | `YYYY-MM-DD.md`         |
+The vault ships with only the **core** buckets below. Add whatever optional page types fit your use
+case with **/configure** — buckets are open-ended (common ones are `projects`, `people`,
+`organizations`, `patterns`, `meetings`, `goals`, `journal`, `plans`, but any name
+works). `/configure` scaffolds the dir, the template, this table row, the matching `index.md`
+section, and the graph color. The rows between the markers are owned by `/configure`; change them by
+re-running it, not by hand.
+
+| Path                | Scope                                                          | Filename convention |
+| ------------------- | ------------------------------------------------------------- | ------------------- |
+| `wiki/_templates/`  | One template per **active** page type. Reference when creating new pages. | `<type>.md` |
+<!-- BUCKETS:START -->
+| `wiki/sources/` | One **summary page per ingested source**. (Karpathy core) | `kebab-title.md` |
+| `wiki/tasks/` | Standalone asks/todos directed at the owner that don't belong to a meeting/goal/project. **Rolling list, not one page per task.** | `open.md / done.md` |
+| `wiki/sessions/` | One **summary page per working session**, scraped from a Claude Code transcript via **/session-ingest**. | `YYYY-MM-DD-topic.md` |
+<!-- BUCKETS:END -->
+
+> **Note:** `wiki/tasks/` is the deliberate exception to Golden Rule #3 (one subject per page) — it's
+> a fixed-file rolling list (`open.md` active, `done.md` archive), since tasks are inherently a list.
+> Capture into it with **/task**; completed tasks move to `done.md` with a `— done: YYYY-MM-DD` suffix.
 
 ## Agent Skills & Tools
 
 Skills in `.claude/skills/` encode the operations. Invoke them by name.
 
 - **ingest** — process a new raw source (a file in `dump/` or a path given as an argument) into the wiki. *(global)*
+- **task** — quick-capture standalone asks/todos from a brain dump into `tasks/open.md`. *(global)*
+- **configure** — tailor which optional wiki buckets exist (from a use-case blurb or a quiz); scaffolds dirs/templates/index/graph. Re-run to reshape the brain. *(global)*
 - **query** — answer a question against the wiki, with citations; optionally file the answer back. *(global)*
 - **lint** — health-check the wiki for contradictions, stale claims, orphans, and gaps. *(global)*
-- **project-snapshot** — survey the repo you're working in and fold an ingestible `projects/` folder-note into the vault. *(global)*
-- **meeting-recap** — right after a call, quiz the user and integrate a targeted recap (meeting note + people/orgs/projects/goals + action items).
-- **touchpoint** — alignment gut-check: is recent time spent moving the goals forward? Advisory; recommends priorities.
-- **session-planning** — morning setup: dependency-order the day's tasks, time-block them, write a `plans/` note, refresh `home.md`.
 - **session-ingest** — scrape the current Claude Code session's transcript and ingest it into the vault as a `sessions/` page (full fan-out). Run before `/clear`. *(global)*
-- **onboard** — set up the vault on a new machine/user: symlink the global skills, set `SECOND_BRAIN_DIR`, personalize Core Info. Re-run to reconfigure. Run after cloning.
+- **onboard** — set up the vault on a new machine/user: symlink the global skills, set `SECOND_BRAIN_DIR`, personalize Core Info, then call **configure** to pick buckets. Re-run to reconfigure. Run after cloning.
 - **offboard** — reverse onboard: remove this vault's global symlinks (and optionally clear `SECOND_BRAIN_DIR`). Never deletes vault content.
 
 **Global skills (cross-CWD).** Skills marked *(global)* run from any repo, not just the vault. They

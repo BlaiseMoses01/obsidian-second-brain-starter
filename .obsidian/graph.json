@@ -15,73 +15,17 @@
       }
     },
     {
-      "query": "tag:#person",
+      "query": "tag:#task",
       "color": {
         "a": 1,
-        "rgb": 5217760
-      }
-    },
-    {
-      "query": "tag:#organization",
-      "color": {
-        "a": 1,
-        "rgb": 2863528
-      }
-    },
-    {
-      "query": "tag:#project",
-      "color": {
-        "a": 1,
-        "rgb": 14711609
-      }
-    },
-    {
-      "query": "tag:#pattern",
-      "color": {
-        "a": 1,
-        "rgb": 12736155
-      }
-    },
-    {
-      "query": "tag:#devlog",
-      "color": {
-        "a": 1,
-        "rgb": 44225
-      }
-    },
-    {
-      "query": "tag:#meeting",
-      "color": {
-        "a": 1,
-        "rgb": 10185686
-      }
-    },
-    {
-      "query": "tag:#goal",
-      "color": {
-        "a": 1,
-        "rgb": 14702140
-      }
-    },
-    {
-      "query": "tag:#journal",
-      "color": {
-        "a": 1,
-        "rgb": 9268835
+        "rgb": 3447003
       }
     },
     {
       "query": "tag:#session",
       "color": {
         "a": 1,
-        "rgb": 7048862
-      }
-    },
-    {
-      "query": "tag:#plan",
-      "color": {
-        "a": 1,
-        "rgb": 5942874
+        "rgb": 13007069
       }
     }
   ],
@@ -95,6 +39,6 @@
   "repelStrength": 10,
   "linkStrength": 1,
   "linkDistance": 250,
-  "scale": 0.6666666666666666,
+  "scale": 0.1316872427983539,
   "close": true
 }
